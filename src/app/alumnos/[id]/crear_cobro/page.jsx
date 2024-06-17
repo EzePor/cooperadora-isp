@@ -1,13 +1,15 @@
 // components/Alumnos/CrearCobro.js
 import React from 'react';
+import CobroCuota from '@/app/componentes/CobroCuota';
 
-function CrearCobroPage() {
-  return (
+function CrearCobroPage({alumno,periodo, monto, fechaPago}) {
+  
+  return  (
     <div>
-      <h1>Crear Cobro</h1>
-      {/* Contenido del formulario para crear un cobro */}
-    </div>
-  );
+    <h1 className='titulo-PagoCuota'>Pago de Cuota Escolar</h1>
+    <CobroCuota alumno={alumno} periodo={periodo} monto={monto} fechaPago={fechaPago} />
+  </div>
+  )
 }
 
 export default CrearCobroPage;
