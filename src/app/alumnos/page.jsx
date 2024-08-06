@@ -164,9 +164,9 @@ export default function AlumnosPage() {
                   </button>
                 </td>
                 <td className=" text-sm lg:text-xl border-b-2  whitespace-nowrap">
-                  <Link href={"/cobros"}>
+                  <Link href={`/alumnos/${user._id}/crear_cobro`}>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2  rounded">
-                      Cobro
+                      Cargar Cobro
                     </button>
                   </Link>
                 </td>

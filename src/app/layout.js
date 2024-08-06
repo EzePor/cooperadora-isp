@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <RootMenu />
-
         <div className="layout-wrapper">{children}</div>
       </body>
     </html>

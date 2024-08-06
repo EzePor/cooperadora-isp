@@ -227,3 +227,9 @@ input{
 font-size: 25px;
 
 }
+
+.selectorCobro{
+  appearance: none;
+  padding: 10px;
+  
+}

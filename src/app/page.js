@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useEffect, useState } from "react";
 import Stats from "./componentes/Stats";
 
@@ -21,11 +20,11 @@ export default function Home() {
 
   return (
     <>
-    <h1 className='layout-titulo'>Inicio</h1>
-    
+      <h1 className="layout-titulo">Inicio</h1>
+
       <div className="contenedor-home">
         {stats.map((stat, index) => (
-          <Stats stat ={stat}/>
+          <Stats key={index} stat={stat} />
         ))}
       </div>
     </>
