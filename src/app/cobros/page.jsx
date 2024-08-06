@@ -12,7 +12,7 @@ export default function CobrosPage() {
     fetch("/api/cobros") // ejecutamos FETCH
       .then((respuesta) => respuesta.json()) // Devuelve promesa, y retornamos .json()
       .then((respuestaCobros) => {
-        // Devuelve promesa y actualizamos users
+        // Devuelve promesa y actualizamos cobros
         setCobros(respuestaCobros);
         setCobrosInit(respuestaCobros);
         setLoading(false);
@@ -35,7 +35,7 @@ export default function CobrosPage() {
   const deleteCobroHandler = (id, cobro) => {
     // Confirmación antes de eliminar
     Swal.fire({
-      title: `¿Estás seguro/a de que deseas eliminar a ${cobro.titulo} ?`,
+      title: `¿Estás seguro/a de que deseas eliminar  "${cobro.titulo}" ?`,
       text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,

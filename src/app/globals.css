@@ -15,6 +15,7 @@
     --poppy-red: #DF2935;
     --safety-orange: #EC7505;
     --tropical-indigoHover: #7a68f1;
+    --grisClaro: #dcddf3;
 }
 
 *{
@@ -196,5 +197,33 @@ input{
     
   }
 
-  
+  .contenedor-home{
+    display: flex; 
+    flex-wrap: wrap;
+    margin:5px;
+    border-radius: 5px;  
+  }
 
+.contenedor-stat{
+  height:100%;
+  background-color: var(--grisClaro);
+  border:1px solid var(--tropical-indigoHover);
+  padding: 15px;
+  margin:10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:  2px 2px 2px rgba(0, 0, 0, 0.3), -2px -2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.titulo-stat{
+  font-size: 20px;
+  text-align: center;
+  padding-right: 7px;
+}
+
+.contador-stat{
+font-size: 25px;
+
+}

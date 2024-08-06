@@ -1,23 +1,33 @@
-import Link from "next/link";
+"use client";
 
+
+import { useEffect, useState } from "react";
+import Stats from "./componentes/Stats";
 
 export default function Home() {
+  const [stats, setStats] = useState([]);
+  const [statsInit, setStatsInit] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/stats") // ejecutamos FETCH
+      .then((respuesta) => respuesta.json()) // Devuelve promesa, y retornamos .json()
+      .then((respuestaStats) => {
+        // Devuelve promesa y actualizamos cobros
+        setStats(respuestaStats);
+        setStatsInit(respuestaStats);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <>
-      <div className="text-center" >
-      <h1 className="text-center font-extrabold text-gray-700 m-6 text-3xl">Página de Inicio</h1>
-      <Link  href="http://isp20.edu.ar/nuevo/#">
-      <img className="m-auto" src="./logo-isp.png" width={250} height={250}/>
-     </Link>
-     <div className="m-8 text-center text-blue-700">
-    <h1 className="">Bienvenido</h1>
-    <p>visítame → <a href="http://isp20.edu.ar/nuevo/#">carreras e información</a></p>
-</div>
-
-
-      </div>
-
+    <h1 className='layout-titulo'>Inicio</h1>
     
+      <div className="contenedor-home">
+        {stats.map((stat, index) => (
+          <Stats stat ={stat}/>
+        ))}
+      </div>
     </>
   );
 }

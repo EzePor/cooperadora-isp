@@ -116,6 +116,12 @@ export default function AlumnosPage() {
             >
               DIRECCIÓN
             </th>
+            <th
+              scope="col"
+              className="px-4 py-1  text-lg font-semibold text-gray-500 "
+            >
+              EDAD
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -138,6 +144,9 @@ export default function AlumnosPage() {
                 </td>
                 <td className="text-xl border-b-2  whitespace-nowrap">
                   {user.direccion}
+                </td>
+                <td className="text-xl border-b-2  whitespace-nowrap">
+                  {user.edad}
                 </td>
                 <td className=" text-xl border-b-2  whitespace-nowrap">
                   <button
