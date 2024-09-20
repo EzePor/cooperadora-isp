@@ -13,7 +13,7 @@ export default function Home() {
       .then((respuestaStats) => {
         // Devuelve promesa y actualizamos cobros
         setStats(respuestaStats);
-        setStatsInit(respuestaStats);
+        //setStatsInit(respuestaStats);
       })
       .catch((err) => console.error(err));
   }, []);

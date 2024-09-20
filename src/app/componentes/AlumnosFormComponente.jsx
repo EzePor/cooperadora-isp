@@ -4,29 +4,27 @@ import { useRef } from "react";
 import Swal from "sweetalert2";
 
 export default function AlumnoFormComponente({ handler }) {
+  const formRef = useRef(null); // Crear una referencia para el formulario
 
-  const formRef = useRef(null);  // Crear una referencia para el formulario
-  
   const formAction = async (formData) => {
-    
-    try{
+    try {
       const response = await handler(formData);
-      if(response && response._id){
+      if (response && response._id) {
         Swal.fire({
           text: `Se ha guardado el alumno/a ${response.nombre} ${response.apellido} con éxito`,
           icon: "success",
           confirmButtonColor: "#d33",
           confirmButtonText: "VOLVER",
-      }).then(() =>{
-        window.location.href = '/alumnos';
-      })}
-    }catch(error){
-      alert('Hubo un error. Intente nuevamente')
+        }).then(() => {
+          window.location.href = "/alumnos";
+        });
+      }
+    } catch (error) {
+      alert("Hubo un error. Intente nuevamente");
     }
+  };
 
-  }
-   
-   /* try {
+  /* try {
       const response = await handler(formData);
       if(response && response._id){
         window.location.href = '/alumnos';
@@ -35,22 +33,21 @@ export default function AlumnoFormComponente({ handler }) {
       alert('Hubo un error. Intente Nuevamente')
     }*/
 
-    /*if (response) {
+  /*if (response) {
       formRef.current.reset();  // Resetear el formulario si la respuesta es exitosa
       alert('Alumno guardado con éxito');
     } else {
       console.error('Error al guardar el alumno', response);
       alert('Error al guardar el alumno');
     }*/
-  
 
   return (
     <form
-    ref={formRef}  // Asociar la referencia al formulario
+      ref={formRef} // Asociar la referencia al formulario
       action={formAction}
       className=" max-w-xl mt-4 bg-[--tropical-indigo] mx-auto  p-8  rounded-lg border-2 border-violet-400 shadow-lg "
     >
-      <div className="mb-4">
+      <div className="mb-4 ">
         <label htmlFor="nombre" className="block text-white font-bold ">
           Nombre:
         </label>

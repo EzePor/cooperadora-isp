@@ -38,13 +38,13 @@ export default async function handler(req, res) {
     } catch (error) {
       res.status(500).json({ error: "Error al enviar los datos" });
     }
-  };
+  }
 
-  if(method === 'DELETE'){
+  if (method === "DELETE") {
     const id = req.body;
     try {
       const response = await fetch(`http://localhost:1977/alumnos/${id}`, {
-        method: 'DELETE'
+        method: "DELETE",
       });
       const responseData = await response.json();
       res.send(responseData);
@@ -66,5 +66,3 @@ export default async function handler(req, res) {
       res.status(500).send(error);
     }
   }*/
-
-

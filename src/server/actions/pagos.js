@@ -1,4 +1,4 @@
-// esta función CobrosFormActionHandler se utiliza para enviar datos de un formulario
+// esta función PagosFormActionHandler se utiliza para enviar datos de un formulario
 // de estudiante a una API en un servidor Next.js, esperar la respuesta del servidor y
 // devolverla.
 
@@ -24,14 +24,10 @@ export const PagosFormActionHandler = async (formData) => {
   // y se pasan como el cuerpo de la solicitud.
   const response = await fetch("http://localhost:3000/api/pagos", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(data),
   });
-  // Se espera la respuesta del servidor y
-  // se convierte en un objeto JSON utilizando el método response.json().
-  //  Finalmente, se devuelve esta respuesta JSON.
-  const result = await response.json();
-  return result;
+
+  const res = await response.json();
+
+  return res;
 };

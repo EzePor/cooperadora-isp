@@ -1,3 +1,5 @@
+"use client";
+
 import PagosFormComponente from "@/app/componentes/PagosFormComponente";
 import { PagosFormActionHandler } from "@/server/actions/pagos";
 

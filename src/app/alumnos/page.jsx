@@ -73,7 +73,7 @@ export default function AlumnosPage() {
   };
 
   return (
-    <div className="h-auto">
+    <div className="h-auto w-full">
       <div className="data-controls">
         <form className="">
           <input
@@ -89,7 +89,7 @@ export default function AlumnosPage() {
           </button>
         </Link>
       </div>
-      <table className="min-w-full divide-y divide-gray-200  ">
+      <table className="menuTable">
         <thead>
           <tr>
             <th
@@ -122,6 +122,10 @@ export default function AlumnosPage() {
             >
               EDAD
             </th>
+            <th
+              scope="col"
+              className="px-4 py-1  text-lg font-semibold text-gray-500 "
+            ></th>
           </tr>
         </thead>
         <tbody>
@@ -167,6 +171,13 @@ export default function AlumnosPage() {
                   <Link href={`/alumnos/${user._id}/crear_cobro`}>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2  rounded">
                       Cargar Cobro
+                    </button>
+                  </Link>
+                </td>
+                <td className=" text-xl border-b-2  whitespace-nowrap">
+                  <Link href={`/alumnos/${user._id}/detalle`}>
+                    <button className="bg-[--jungle-green] hover:bg-[--jungle-greenHover] text-white font-bold py-1 px-2   rounded">
+                      Detalle
                     </button>
                   </Link>
                 </td>

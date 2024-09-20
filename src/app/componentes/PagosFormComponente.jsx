@@ -14,6 +14,7 @@ function PagosFormComponente({ params, handler }) {
       try {
         const response = await fetch(`/api/alumnos/${id}`);
         const data = await response.json();
+        console.log("Alumno fetched:", data);
         setAlumno(data);
       } catch (error) {
         console.error("Error fetching alumno:", error);
@@ -115,7 +116,7 @@ function PagosFormComponente({ params, handler }) {
             <input
               type="date"
               name="fecha"
-              placeholder="40350266"
+              placeholder=""
               className="shadow appearance-none border rounded w-full  hover:border-blue-800  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

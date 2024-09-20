@@ -140,16 +140,7 @@ export default function CobrosPage() {
                   <td className="text-xl border-b-2  whitespace-nowrap">
                     {cobro.monto}
                   </td>
-                  <td className=" text-xl border-b-2  whitespace-nowrap">
-                    <button
-                      onClick={() => {
-                        deleteCobroHandler(cobro._id, cobro);
-                      }}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2   rounded"
-                    >
-                      Eliminar
-                    </button>
-                  </td>
+                  <td className=" text-xl border-b-2  whitespace-nowrap"></td>
                   <td className=" text-xl border-b-2  whitespace-nowrap">
                     <button className="bg-[--jungle-green] hover:bg-[--jungle-greenHover] text-white font-bold py-1 px-2   rounded">
                       Editar
