@@ -74,7 +74,7 @@ export default function DetalleAlumnoPage({ params }) {
                     </li>
                     <li>
                       SALDOS:
-                      <strong>
+                      <strong className="text-red-700">
                         {formatNumberToCurrency(alumno.pagosPendientes)}
                       </strong>
                     </li>

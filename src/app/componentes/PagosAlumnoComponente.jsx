@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { formatNumberToCurrency } from "@/utils/format-helpers";
 import Swal from "sweetalert2";
 import Link from "next/link";
+import { FaTrashAlt } from "react-icons/fa"; // Importamos el ícono de eliminación
 
 export default function PagosAlumnoComponente({ pagos, params }) {
   const { id: alumnoId } = params;
@@ -41,20 +42,75 @@ export default function PagosAlumnoComponente({ pagos, params }) {
         })
           .then((respuesta) => respuesta.json())
           .then((data) => {
-            setPagosState((prevPagos) =>
-              prevPagos.map((pago) =>
-                pago._id === data._id ? { ...pago, pagado: true } : pago
-              )
-            );
+            const pagosModificados = pagosState.map((pago) => {
+              if (pago._id === data._id) {
+                pago.pagado = true;
+              }
+
+              return pago;
+            });
+            setPagosState(pagosModificados);
+            // Mostrar mensaje de éxito
+            Swal.fire({
+              title: "¡Pago realizado con éxito!",
+              text: "El pago se ha realizado con éxito",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
           })
-          .catch((error) => console.error(error));
+          .catch((error) => {
+            console.error("Error al actualizar el pago:", error);
+            Swal.fire({
+              title: "Error",
+              text: "Hubo un problema al actualizar el pago. Por favor, inténtelo de nuevo.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
+  const eliminarPago = (pagoId) => {
+    Swal.fire({
+      title: "¿Estás seguro/a?",
+      text: "Estás a punto de eliminar este pago pendiente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`/api/pagos/${pagoId}`, {
+          method: "DELETE",
+        })
+          .then((respuesta) => respuesta.json())
+          .then(() => {
+            const pagosFiltrados = pagosState.filter(
+              (pago) => pago._id !== pagoId
+            );
+            setPagosState(pagosFiltrados);
+            Swal.fire({
+              title: "Pago eliminado",
+              text: "El pago pendiente ha sido eliminado correctamente.",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+          })
+          .catch((error) => {
+            console.error("Error al eliminar el pago:", error);
+            Swal.fire({
+              title: "Error",
+              text: "Hubo un problema al eliminar el pago. Por favor, inténtelo de nuevo.",
+              icon: "error",
+            });
+          });
       }
     });
   };
 
   return (
     <>
-      {pagosState.lenght == 0 ? (
+      {pagosState.length == 0 ? (
         <div className="text-center my-4">
           <h2 className="text-xl font-bold text-red-500">
             El alumno no tiene ningún cobro
@@ -92,8 +148,8 @@ export default function PagosAlumnoComponente({ pagos, params }) {
                   </td>
                   <td className="border px-4 py-2 text-center">
                     {pago.pagado ? (
-                      <div>
-                        <span className="text-green-500 font-bold">
+                      <div className="flex justify-around">
+                        <span className="text-green-500 font-extrabold">
                           ABONADO
                         </span>
                         <Link
@@ -105,17 +161,22 @@ export default function PagosAlumnoComponente({ pagos, params }) {
                         </Link>
                       </div>
                     ) : (
-                      <div>
-                        <span className="text-red-500 font-bold">
+                      <div className="flex justify-around items-center gap-10">
+                        <span className="text-red-500 font-extrabold">
                           PENDIENTE
                         </span>
                         <button
                           disabled={pago.pagado}
-                          className="bg-green-500 text-white px-2 py-1 ml-6 rounded-md hover:bg-green-600 transition duration-150 ease-in-out"
+                          className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600 transition duration-150 ease-in-out"
                           onClick={() => efectuarPago(pago._id)}
                         >
                           ABONAR
                         </button>
+                        <FaTrashAlt
+                          onClick={() => eliminarPago(pago._id)}
+                          className="text-red-500 cursor-pointer hover:text-red-700"
+                          style={{ fontSize: "1.5rem" }}
+                        />
                       </div>
                     )}
                   </td>

@@ -53,30 +53,11 @@ export default async function handler(req, res) {
     }
   }
 
-  /*if (method === "PUT") {
-    try {
-      const id = JSON.parse(req.body); // Obtenemos todos los datos para actualizar
-
-      const response = await fetch(`http://localhost:1977/pagos/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(id), // Enviamos todos los datos del cobro
-      });
-
-      const responseData = await response.json();
-      res.status(200).json(responseData);
-    } catch (error) {
-      res.status(500).json({ error: "Error al actualizar el cobro" });
-    }
-  }*/
-
   if (method === "PUT") {
     try {
       const data = JSON.parse(req.body);
       // Fetch a backend con metodo PUT
-      const response = await fetch("http://localhost:1973/pagos", {
+      const response = await fetch("http://localhost:1977/pagos", {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {
@@ -90,6 +71,24 @@ export default async function handler(req, res) {
     }
   }
 }
+
+/*if (method === "PUT") {
+    try {
+      const data = JSON.parse(req.body);
+      // Fetch a backend con metodo PUT
+      const response = await fetch("http://localhost:1977/pagos", {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await response.json();
+      res.send(responseData);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }*/
 
 /*if(method === 'PUT'){
       const id = req.body;

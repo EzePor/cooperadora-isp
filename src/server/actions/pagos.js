@@ -11,7 +11,7 @@ export const PagosFormActionHandler = async (formData) => {
     alumno_id: formData.get("alumno_id"),
     cobro_id: formData.get("cobro_id"),
     fechaCreacion: formData.get("fecha"),
-    pagado: formData.get("pagado") === "on" ? true : false,
+    pagado: false, //formData.get("pagado") === "on" ? true : false,
   };
 
   console.log("Datos del formulario:", data);
