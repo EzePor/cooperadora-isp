@@ -5,52 +5,31 @@ import { useRef } from "react";
 import Swal from "sweetalert2";
 
 export default function CobrosFormComponente({ handler }) {
+  const formRef = useRef(null); // Crear una referencia para el formulario
 
-  const formRef = useRef(null);  // Crear una referencia para el formulario
-  
   const formAction = async (formData) => {
-  
-    
-    try{
+    try {
       const response = await handler(formData);
-      console.log('Respuesta del servidor:', response);  
-      if(response && response._id){
+      console.log("Respuesta del servidor:", response);
+      if (response && response._id) {
         Swal.fire({
-          title:'Cobro creado',
+          title: "Cobro creado",
           text: `Se ha guardado el cobro ${response.titulo} con éxito`,
           icon: "success",
           confirmButtonColor: "#d33",
           confirmButtonText: "VOLVER",
-      }).then(() =>{
-        window.location.href = '/cobros';
-      })}
-    }catch(error){
-      alert('Hubo un error. Intente nuevamente')
-    }
-
-  }
-   
-   /* try {
-      const response = await handler(formData);
-      if(response && response._id){
-        window.location.href = '/alumnos';
+        }).then(() => {
+          window.location.href = "/cobros";
+        });
       }
     } catch (error) {
-      alert('Hubo un error. Intente Nuevamente')
-    }*/
-
-    /*if (response) {
-      formRef.current.reset();  // Resetear el formulario si la respuesta es exitosa
-      alert('Alumno guardado con éxito');
-    } else {
-      console.error('Error al guardar el alumno', response);
-      alert('Error al guardar el alumno');
-    }*/
-  
+      alert("Hubo un error. Intente nuevamente");
+    }
+  };
 
   return (
     <form
-    ref={formRef}  // Asociar la referencia al formulario
+      ref={formRef} // Asociar la referencia al formulario
       action={formAction}
       className=" max-w-xl mt-4 bg-[--tropical-indigo] mx-auto  p-8  rounded-lg border-2 border-violet-400 shadow-lg "
     >
@@ -68,7 +47,7 @@ export default function CobrosFormComponente({ handler }) {
       </div>
       <div className="mb-4">
         <label htmlFor="descripcion" className="block text-white font-bold ">
-         Descripción
+          Descripción
         </label>
         <input
           type="text"
@@ -80,7 +59,7 @@ export default function CobrosFormComponente({ handler }) {
       </div>
       <div className="mb-4">
         <label htmlFor="monto" className="block text-white font-bold ">
-         Monto:
+          Monto:
         </label>
         <input
           type="text"
@@ -90,7 +69,7 @@ export default function CobrosFormComponente({ handler }) {
           className="shadow appearance-none border rounded w-full  hover:border-blue-800  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
-      
+
       <div className="flex ">
         <div className="flex items-center justify-center  mr-8">
           <button
@@ -101,13 +80,13 @@ export default function CobrosFormComponente({ handler }) {
           </button>
         </div>
         <div className="flex items-center justify-center">
-          <Link href={'/cobros'} >
-          <button
-            type="submit"
-            className="bg-green-600 mt-4   hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Cancelar
-          </button> 
+          <Link href={"/cobros"}>
+            <button
+              type="submit"
+              className="bg-green-600 mt-4   hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Cancelar
+            </button>
           </Link>
         </div>
       </div>

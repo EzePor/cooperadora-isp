@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import Swal from "sweetalert2";
 
 export default function AlumnoFormComponente({ handler }) {
@@ -9,6 +10,7 @@ export default function AlumnoFormComponente({ handler }) {
   const formAction = async (formData) => {
     try {
       const response = await handler(formData);
+      console.log(response);
       if (response && response._id) {
         Swal.fire({
           text: `Se ha guardado el alumno/a ${response.nombre} ${response.apellido} con éxito`,
@@ -23,23 +25,6 @@ export default function AlumnoFormComponente({ handler }) {
       alert("Hubo un error. Intente nuevamente");
     }
   };
-
-  /* try {
-      const response = await handler(formData);
-      if(response && response._id){
-        window.location.href = '/alumnos';
-      }
-    } catch (error) {
-      alert('Hubo un error. Intente Nuevamente')
-    }*/
-
-  /*if (response) {
-      formRef.current.reset();  // Resetear el formulario si la respuesta es exitosa
-      alert('Alumno guardado con éxito');
-    } else {
-      console.error('Error al guardar el alumno', response);
-      alert('Error al guardar el alumno');
-    }*/
 
   return (
     <form
@@ -156,12 +141,14 @@ export default function AlumnoFormComponente({ handler }) {
           </button>
         </div>
         <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            className="bg-green-600 mt-4   hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Cancelar
-          </button>
+          <Link href="/alumnos">
+            <button
+              type="submit"
+              className="bg-green-600 mt-4   hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Cancelar
+            </button>
+          </Link>
         </div>
       </div>
     </form>

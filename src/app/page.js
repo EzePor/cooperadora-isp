@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Stats from "./componentes/Stats";
+import ShowAlumno from "./componentes/ShowAlumnoInicio";
+import ShowPagos from "./componentes/ShowPagosInicio";
 
 export default function Home() {
   const [stats, setStats] = useState([]);
@@ -26,6 +28,12 @@ export default function Home() {
         {stats.map((stat, index) => (
           <Stats key={index} stat={stat} />
         ))}
+      </div>
+      <div className="contenedor-home">
+        <ShowAlumno />
+      </div>
+      <div className="contenedor-home">
+        <ShowPagos />
       </div>
     </>
   );

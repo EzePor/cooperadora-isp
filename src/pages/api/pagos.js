@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const { method } = req;
+  /* const { method } = req;
 
   if (method === "GET") {
     try {
@@ -9,7 +9,41 @@ export default async function handler(req, res) {
     } catch (error) {
       res.status(500).json({ error: "Error al obtener los datos" });
     }
+  }*/
+
+  const { method } = req;
+  const { limit } = req.query; // Obtener el parámetro de consulta 'limit'
+
+  if (method === "GET") {
+    try {
+      const response = await fetch("http://localhost:1977/pagos");
+      const data = await response.json();
+
+      let pagos;
+      if (limit) {
+        // Si se proporciona el parámetro 'limit', obtener los últimos 'limit' pagos
+        const limitNumber = parseInt(limit, 10);
+        pagos = data
+          .sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion))
+          .slice(0, limitNumber);
+      } else {
+        // Si no se proporciona el parámetro 'limit', obtener todos los pagos
+        pagos = data;
+      }
+
+      res.status(200).json(pagos);
+    } catch (error) {
+      res.status(500).json({ error: "Error al obtener los datos" });
+    }
   }
+
+  //if (method === "POST") {
+  //  const data = JSON.parse(req.body);
+  // console.log(data);
+  // res.status(200).json({ message: "ok", data });
+  // } else {
+  //  res.status(405).json({ error: "Método no permitido" });
+  //}
 
   // se verifica si la solicitud es de tipo POST.
   // primero se analiza el cuerpo de la solicitud (req.body) utilizando JSON.parse()

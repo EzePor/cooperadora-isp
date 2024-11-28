@@ -1,11 +1,34 @@
 export default async function handler(req, res) {
-  const { method } = req;
+  /* const { method } = req;
 
   if (method === "GET") {
     try {
       const response = await fetch("http://localhost:1977/alumnos");
       const data = await response.json();
       res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json({ error: "Error al obtener los datos" });
+    }
+  }*/
+  const { method } = req;
+  const { limit } = req.query; // Obtener el parámetro de consulta 'limit'
+
+  if (method === "GET") {
+    try {
+      const response = await fetch("http://localhost:1977/alumnos");
+      const data = await response.json();
+
+      let alumnos;
+      if (limit) {
+        // Si se proporciona el parámetro 'limit', obtener los últimos 'limit' alumnos
+        const limitNumber = parseInt(limit, 10);
+        alumnos = data.slice(-limitNumber).reverse();
+      } else {
+        // Si no se proporciona el parámetro 'limit', obtener todos los alumnos
+        alumnos = data;
+      }
+
+      res.status(200).json(alumnos);
     } catch (error) {
       res.status(500).json({ error: "Error al obtener los datos" });
     }
@@ -20,23 +43,20 @@ export default async function handler(req, res) {
   //en la solicitud.
 
   if (method === "POST") {
+    const data = JSON.parse(req.body);
+    // Fetch a backend
     try {
-      const data = JSON.parse(req.body); // es el cuerpo de la informacion del formulario
-      console.log(data);
-
-      // envio de datos al Backend
       const response = await fetch("http://localhost:1977/alumnos", {
         method: "POST",
+        body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
       });
-      // se espera la respuesta del backend y se conviente en un objeto de JS
-      const result = await response.json();
-      res.status(200).json(result); // envia respuesta al cliente
+      const responseData = await response.json();
+      res.send(responseData);
     } catch (error) {
-      res.status(500).json({ error: "Error al enviar los datos" });
+      res.status(500).send(error);
     }
   }
 
